@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — BuildAI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0f0e0c;--ink2:#3a3835;--ink3:#6b6860;--cream:#faf8f4;--cream2:#f2ede4;--accent:#d4521a;--accent2:#e87840;--accent-light:#fdf0ea;--blue:#1a3d6b;--blue-light:#e8eff8;--green:#1a5c3a;--green-light:#e8f5ee;--border:rgba(15,14,12,0.1);--radius:12px;--radius-lg:20px}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}h1,h2,h3{font-family:'Syne',sans-serif;line-height:1.15;font-weight:700}a{color:inherit;text-decoration:none}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,248,244,0.93);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 40px;height:68px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;letter-spacing:-0.5px;display:flex;align-items:center;gap:8px}.nav-logo span{color:var(--accent)}
+.logo-dot{width:8px;height:8px;background:var(--accent);border-radius:50%;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.3);opacity:.7}}
+.nav-links{display:flex;align-items:center;gap:32px;list-style:none}.nav-links a{font-size:14px;font-weight:500;color:var(--ink2);transition:color .2s;position:relative}.nav-links a::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:1.5px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}.nav-links a:hover{color:var(--accent)}.nav-links a:hover::after{transform:scaleX(1)}
+.nav-cta{background:var(--ink)!important;color:var(--cream)!important;padding:10px 22px!important;border-radius:100px!important;transition:background .2s!important}.nav-cta::after{display:none!important}.nav-cta:hover{background:var(--accent)!important}
+.contact-wrap{display:grid;grid-template-columns:1fr 1fr;min-height:100vh;padding-top:68px}
+.contact-left{background:var(--ink);padding:80px 60px;display:flex;flex-direction:column;justify-content:center}
+.contact-right{padding:80px 60px;display:flex;flex-direction:column;justify-content:center}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent2);margin-bottom:16px}
+.info-item{display:flex;gap:16px;margin-bottom:28px;align-items:flex-start}
+.info-icon{width:44px;height:44px;border-radius:12px;border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;background:rgba(255,255,255,.04)}
+.info-label{font-size:12px;font-weight:500;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
+.info-val{font-size:15px;color:rgba(255,255,255,.8)}
+.trust-box{margin-top:48px;padding:24px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);display:flex;flex-direction:column;gap:10px}
+.trust-item{display:flex;gap:10px;align-items:center;font-size:14px;color:rgba(255,255,255,.5)}
+.trust-check{color:var(--accent2);font-size:16px;flex-shrink:0}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
+.form-group{margin-bottom:20px}
+label{display:block;font-size:13px;font-weight:500;color:var(--ink2);margin-bottom:6px}
+input,textarea,select{width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:var(--radius);font-family:'DM Sans',sans-serif;font-size:15px;color:var(--ink);background:white;transition:border-color .2s,box-shadow .2s;outline:none;resize:vertical}
+input:focus,textarea:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(212,82,26,.08)}
+input::placeholder,textarea::placeholder{color:var(--ink3)}
+select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%236b6860' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;padding-right:40px}
+textarea{min-height:120px}
+.submit-btn{width:100%;padding:16px;background:var(--ink);color:white;border:none;border-radius:100px;font-size:16px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .2s,transform .15s;margin-top:8px;display:flex;align-items:center;justify-content:center;gap:8px}
+.submit-btn:hover{background:var(--accent);transform:translateY(-2px)}
+.form-note{font-size:13px;color:var(--ink3);text-align:center;margin-top:16px}
+footer{background:var(--ink);padding:40px;border-top:1px solid rgba(255,255,255,.06)}
+.ft-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+.ft-logo{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:white}.ft-logo span{color:var(--accent)}
+.ft-row{display:flex;gap:28px;list-style:none}.ft-row a{font-size:14px;color:rgba(255,255,255,.4);transition:color .2s}.ft-row a:hover{color:white}
+@media(max-width:900px){nav{padding:0 20px}.nav-links{display:none}.contact-wrap{grid-template-columns:1fr}.contact-left,.contact-right{padding:60px 24px}.form-row{grid-template-columns:1fr}.ft-inner{flex-direction:column;gap:20px;text-align:center}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo"><div class="logo-dot"></div>Build<span>AI</span></a>
+  <ul class="nav-links">
+    <li><a href="services.html">Services</a></li>
+    <li><a href="index.html#how">How It Works</a></li>
+    <li><a href="work.html">Our Work</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html" class="nav-cta">Book a Free Call</a></li>
+  </ul>
+</nav>
+
+<div class="contact-wrap">
+  <div class="contact-left">
+    <p class="eyebrow">Get In Touch</p>
+    <h1 style="font-size:clamp(36px,4vw,52px);letter-spacing:-1.5px;color:white;margin-bottom:20px;">Let's talk about your project</h1>
+    <p style="font-size:16px;color:rgba(255,255,255,.5);font-weight:300;line-height:1.7;margin-bottom:48px;">Tell us what you're building. We'll give you an honest assessment — and if we're a good fit, we'll show you exactly how we'd approach it.</p>
+    <div class="info-item"><div class="info-icon">📧</div><div><div class="info-label">Email Us</div><div class="info-val">hello@buildai.co</div></div></div>
+    <div class="info-item"><div class="info-icon">📞</div><div><div class="info-label">Schedule a Call</div><div class="info-val">Free 30-min strategy session</div></div></div>
+    <div class="info-item"><div class="info-icon">⏱️</div><div><div class="info-label">Response Time</div><div class="info-val">We reply within 24 hours</div></div></div>
+    <div class="trust-box">
+      <div class="trust-item"><span class="trust-check">✓</span>No obligation — just an honest conversation</div>
+      <div class="trust-item"><span class="trust-check">✓</span>Free strategy brief included after the call</div>
+      <div class="trust-item"><span class="trust-check">✓</span>We'll tell you if we're not the right fit</div>
+      <div class="trust-item"><span class="trust-check">✓</span>NDA available upon request</div>
+    </div>
+  </div>
+
+  <div class="contact-right">
+    <h2 style="font-size:clamp(28px,3vw,40px);letter-spacing:-1px;margin-bottom:8px;">Book a free strategy call</h2>
+    <p style="font-size:15px;color:var(--ink3);margin-bottom:36px;">Fill in the details below and we'll get back to you within 24 hours.</p>
+
+    <div id="successMsg" style="display:none;background:var(--green-light);border:1px solid rgba(26,92,58,.15);border-radius:var(--radius);padding:40px;text-align:center;">
+      <div style="font-size:40px;margin-bottom:16px;">🎉</div>
+      <strong style="font-size:18px;font-family:'Syne',sans-serif;color:var(--green);display:block;margin-bottom:8px;">Message received!</strong>
+      <p style="font-size:15px;color:var(--green);">We'll review your details and reach out within 24 hours to schedule your free strategy call.</p>
+    </div>
+
+    <form id="contactForm" onsubmit="handleSubmit(event)">
+      <div class="form-row">
+        <div class="form-group"><label>First Name</label><input type="text" placeholder="Arjun" required></div>
+        <div class="form-group"><label>Last Name</label><input type="text" placeholder="Sharma" required></div>
+      </div>
+      <div class="form-group"><label>Email Address</label><input type="email" placeholder="arjun@company.com" required></div>
+      <div class="form-group"><label>Company / Startup Name</label><input type="text" placeholder="My Awesome Startup"></div>
+      <div class="form-group">
+        <label>What are you looking for?</label>
+        <select>
+          <option value="">Select a service...</option>
+          <option>AI Software Development</option>
+          <option>Product Roadmap Strategy</option>
+          <option>MVP in 6 Weeks</option>
+          <option>AI Integration into Existing Product</option>
+          <option>Product Audit</option>
+          <option>Ongoing Partnership</option>
+          <option>Not sure yet — need guidance</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Estimated Budget</label>
+        <select>
+          <option value="">Select a range...</option>
+          <option>Under $10,000</option>
+          <option>$10,000 – $25,000</option>
+          <option>$25,000 – $60,000</option>
+          <option>$60,000+</option>
+          <option>Let's discuss</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Tell us about your project</label><textarea placeholder="Describe your idea, the problem you're solving, and where you are right now (idea stage, existing product, etc.)..." required></textarea></div>
+      <button type="submit" class="submit-btn">Send Message & Book Call →</button>
+      <p class="form-note">🔒 Your information is private and never shared.</p>
+    </form>
+  </div>
+</div>
+
+<footer>
+  <div class="ft-inner">
+    <div class="ft-logo">Build<span>AI</span></div>
+    <ul class="ft-row"><li><a href="index.html">Home</a></li><li><a href="services.html">Services</a></li><li><a href="work.html">Work</a></li><li><a href="about.html">About</a></li></ul>
+    <span style="font-size:13px;color:rgba(255,255,255,.25);">© 2025 BuildAI</span>
+  </div>
+</footer>
+<script>
+function handleSubmit(e){
+  e.preventDefault();
+  const btn=document.querySelector('.submit-btn');
+  btn.textContent='Sending...';btn.disabled=true;
+  setTimeout(()=>{
+    document.getElementById('contactForm').style.display='none';
+    document.getElementById('successMsg').style.display='block';
+  },1200);
+}
+</script>
+</body></html>

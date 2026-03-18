@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services — BuildAI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0f0e0c;--ink2:#3a3835;--ink3:#6b6860;--cream:#faf8f4;--cream2:#f2ede4;--accent:#d4521a;--accent2:#e87840;--accent-light:#fdf0ea;--blue:#1a3d6b;--blue-light:#e8eff8;--green:#1a5c3a;--green-light:#e8f5ee;--border:rgba(15,14,12,0.1);--radius:12px;--radius-lg:20px;--shadow:0 1px 3px rgba(15,14,12,0.06),0 4px 16px rgba(15,14,12,0.06);--shadow-lg:0 8px 40px rgba(15,14,12,0.12)}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}h1,h2,h3,h4{font-family:'Syne',sans-serif;line-height:1.15;font-weight:700}a{color:inherit;text-decoration:none}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,248,244,0.93);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 40px;height:68px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;letter-spacing:-0.5px;display:flex;align-items:center;gap:8px}.nav-logo span{color:var(--accent)}
+.logo-dot{width:8px;height:8px;background:var(--accent);border-radius:50%;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.3);opacity:.7}}
+.nav-links{display:flex;align-items:center;gap:32px;list-style:none}.nav-links a{font-size:14px;font-weight:500;color:var(--ink2);transition:color .2s;position:relative}.nav-links a::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:1.5px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}.nav-links a:hover{color:var(--accent)}.nav-links a:hover::after{transform:scaleX(1)}
+.nav-cta{background:var(--ink)!important;color:var(--cream)!important;padding:10px 22px!important;border-radius:100px!important;transition:background .2s,transform .15s!important}.nav-cta::after{display:none!important}.nav-cta:hover{background:var(--accent)!important;transform:translateY(-1px)}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+section{padding:80px 40px}.container{max-width:1200px;margin:0 auto}
+.svc-detail{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;padding:80px 40px;max-width:1200px;margin:0 auto}
+.svc-detail:nth-child(even){direction:rtl}.svc-detail:nth-child(even)>*{direction:ltr}
+.svc-detail+.svc-detail{border-top:1px solid var(--border)}
+.icon-lg{width:72px;height:72px;border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:32px;margin-bottom:24px}
+.icon-o{background:var(--accent-light)}.icon-b{background:var(--blue-light)}.icon-g{background:var(--green-light)}
+.svc-tag{display:inline-block;background:var(--cream2);color:var(--ink2);font-size:12px;font-weight:500;padding:4px 14px;border-radius:100px;margin-bottom:20px}
+.feat-list{display:flex;flex-direction:column;gap:12px;margin-bottom:32px}
+.feat-item{display:flex;gap:12px;font-size:15px;color:var(--ink2)}
+.feat-check{color:var(--accent);font-size:18px;flex-shrink:0}
+.btn-primary{background:var(--ink);color:var(--cream);padding:14px 28px;border-radius:100px;font-size:15px;font-weight:500;display:inline-flex;align-items:center;gap:8px;transition:background .2s,transform .15s;border:none;font-family:'DM Sans',sans-serif;cursor:pointer}
+.btn-primary:hover{background:var(--accent);transform:translateY(-2px)}
+.vis-box{background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px;box-shadow:var(--shadow)}
+.vis-label{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);margin-bottom:20px;display:flex;align-items:center;gap:8px}
+.vdot{width:6px;height:6px;border-radius:50%;background:#22c55e}
+.check-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--border);font-size:14px}.check-row:last-child{border-bottom:none}
+.badge{font-size:12px;font-weight:500;padding:3px 10px;border-radius:100px}
+.b-done{background:var(--green-light);color:var(--green)}.b-ai{background:var(--accent-light);color:var(--accent)}.b-next{background:var(--blue-light);color:var(--blue)}
+.price-sec{background:var(--cream2)}
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:56px}
+.price-card{background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:36px 32px;position:relative;transition:transform .25s,box-shadow .25s}.price-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.price-card.featured{border:2px solid var(--accent);background:var(--ink)}
+.pop-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--accent);color:white;font-size:12px;font-weight:600;padding:4px 16px;border-radius:100px;white-space:nowrap}
+.price-name{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;margin-bottom:8px}
+.price-card.featured .price-name{color:white}
+.price-val{font-family:'Syne',sans-serif;font-size:40px;font-weight:800;letter-spacing:-1px;margin:16px 0 4px}
+.price-card.featured .price-val{color:white}
+.price-per{font-size:13px;color:var(--ink3);margin-bottom:24px}.price-card.featured .price-per{color:rgba(255,255,255,.5)}
+.price-feats{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:32px;font-size:14px;color:var(--ink2)}.price-card.featured .price-feats{color:rgba(255,255,255,.7)}
+.pf{display:flex;gap:8px}.pc{color:var(--accent)}
+.btn-price{width:100%;padding:14px;border-radius:100px;font-size:15px;font-weight:500;cursor:pointer;border:1.5px solid var(--border);background:transparent;font-family:'DM Sans',sans-serif;color:var(--ink);transition:all .2s;text-align:center;display:block}
+.btn-price:hover{background:var(--ink);color:white;border-color:var(--ink)}
+.btn-price.featured{background:var(--accent);color:white;border-color:var(--accent)}.btn-price.featured:hover{background:white;color:var(--accent)}
+.faq-list{max-width:760px;margin:48px auto 0;display:flex;flex-direction:column;gap:2px}
+.faq-item{background:white;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.faq-q{padding:20px 24px;font-family:'Syne',sans-serif;font-size:16px;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:background .2s}.faq-q:hover{background:var(--cream2)}
+.faq-icon{font-size:18px;color:var(--accent);transition:transform .3s;flex-shrink:0}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .3s;font-size:15px;color:var(--ink2);line-height:1.7;padding:0 24px}
+.faq-item.open .faq-a{max-height:200px;padding:0 24px 20px}.faq-item.open .faq-icon{transform:rotate(45deg)}
+footer{background:var(--ink);padding:60px 40px 36px;border-top:1px solid rgba(255,255,255,.06)}
+.ft{max-width:1200px;margin:0 auto}
+.ft-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:60px;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:32px}
+.ft-logo{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:white;margin-bottom:12px}.ft-logo span{color:var(--accent)}
+.ft-desc{font-size:14px;color:rgba(255,255,255,.4);line-height:1.65;max-width:280px}
+.ft-col-title{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.08em;margin-bottom:20px}
+.ft-links{list-style:none;display:flex;flex-direction:column;gap:12px}.ft-links a{font-size:14px;color:rgba(255,255,255,.5);transition:color .2s}.ft-links a:hover{color:white}
+.ft-bottom{display:flex;align-items:center;justify-content:space-between;font-size:13px;color:rgba(255,255,255,.3)}
+@media(max-width:900px){nav{padding:0 20px}.nav-links{display:none}.svc-detail{grid-template-columns:1fr;gap:40px;direction:ltr!important}.price-grid{grid-template-columns:1fr}.ft-top{grid-template-columns:1fr 1fr;gap:32px}.ft-bottom{flex-direction:column;gap:12px;text-align:center}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo"><div class="logo-dot"></div>Build<span>AI</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="index.html#how">How It Works</a></li>
+    <li><a href="work.html">Our Work</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html" class="nav-cta">Book a Free Call</a></li>
+  </ul>
+</nav>
+<div style="padding-top:68px;">
+<div style="padding:140px 40px 80px;max-width:900px;margin:0 auto;">
+  <p class="eyebrow">Services</p>
+  <h1 style="font-size:clamp(40px,5vw,64px);letter-spacing:-2px;margin-bottom:20px;">Everything You Need to Build & Scale AI Products</h1>
+  <p style="font-size:18px;color:var(--ink2);font-weight:300;line-height:1.65;">From strategy to launch — we're your full-stack AI partner. Choose what fits your stage, or let us design a custom engagement.</p>
+</div>
+
+<div id="dev" class="svc-detail">
+  <div>
+    <div class="icon-lg icon-o">🏗️</div>
+    <span class="svc-tag">Core Service</span>
+    <h2 style="font-size:clamp(28px,3vw,40px);letter-spacing:-1px;margin-bottom:16px;">AI Software Development</h2>
+    <p style="font-size:16px;color:var(--ink2);line-height:1.7;margin-bottom:28px;">We build production-grade, AI-native applications from scratch. Not templates. Not no-code tools. Real engineering — with AI designed into the architecture from day one, not added as an afterthought.</p>
+    <div class="feat-list">
+      <div class="feat-item"><span class="feat-check">→</span>Full-stack web and mobile applications</div>
+      <div class="feat-item"><span class="feat-check">→</span>AI model integration — LLMs, vision, recommendation systems</div>
+      <div class="feat-item"><span class="feat-check">→</span>API design and backend engineering</div>
+      <div class="feat-item"><span class="feat-check">→</span>CI/CD setup, cloud deployment, and monitoring</div>
+      <div class="feat-item"><span class="feat-check">→</span>Weekly sprint demos with full code transparency</div>
+    </div>
+    <a href="contact.html" class="btn-primary">Start a Project →</a>
+  </div>
+  <div>
+    <div class="vis-box">
+      <div class="vis-label"><div class="vdot"></div>Sprint Progress — Active Project</div>
+      <div class="check-row"><span style="color:var(--ink2);">Product brief & architecture</span><span class="badge b-done">Complete</span></div>
+      <div class="check-row"><span style="color:var(--ink2);">Database schema & API design</span><span class="badge b-done">Complete</span></div>
+      <div class="check-row"><span style="color:var(--ink2);">AI model selection & fine-tuning</span><span class="badge b-ai">In Progress</span></div>
+      <div class="check-row"><span style="color:var(--ink2);">Frontend development</span><span class="badge b-next">Next Sprint</span></div>
+      <div class="check-row"><span style="color:var(--ink2);">QA, testing & deployment</span><span class="badge b-next">Queued</span></div>
+    </div>
+  </div>
+</div>
+
+<div id="pm" class="svc-detail">
+  <div>
+    <div class="icon-lg icon-b">🗺️</div>
+    <span class="svc-tag">Strategy Service</span>
+    <h2 style="font-size:clamp(28px,3vw,40px);letter-spacing:-1px;margin-bottom:16px;">Product Roadmap Strategy</h2>
+    <p style="font-size:16px;color:var(--ink2);line-height:1.7;margin-bottom:28px;">Most companies build the wrong features in the wrong order. We bring product management expertise to help you prioritize ruthlessly, map user journeys clearly, and create roadmaps that actually get executed — not just filed away.</p>
+    <div class="feat-list">
+      <div class="feat-item"><span class="feat-check">→</span>Feature discovery & user story mapping</div>
+      <div class="feat-item"><span class="feat-check">→</span>MoSCoW prioritization framework</div>
+      <div class="feat-item"><span class="feat-check">→</span>90-day roadmap with quarterly OKRs</div>
+      <div class="feat-item"><span class="feat-check">→</span>Competitive analysis & market positioning</div>
+      <div class="feat-item"><span class="feat-check">→</span>Monthly roadmap review and adjustment calls</div>
+    </div>
+    <a href="contact.html" class="btn-primary">Get a Free Roadmap Audit →</a>
+  </div>
+  <div>
+    <div class="vis-box">
+      <div class="vis-label">Sample 90-Day Roadmap</div>
+      <div style="display:flex;flex-direction:column;gap:14px;margin-top:8px;">
+        <div><div style="font-size:12px;font-weight:600;color:var(--accent);margin-bottom:8px;">MONTH 1 — Foundation</div><div style="display:flex;flex-direction:column;gap:6px;"><div style="background:var(--cream2);border-radius:8px;padding:10px 14px;font-size:13px;color:var(--ink2);">Core user auth & onboarding flow</div><div style="background:var(--cream2);border-radius:8px;padding:10px 14px;font-size:13px;color:var(--ink2);">AI data pipeline setup</div></div></div>
+        <div><div style="font-size:12px;font-weight:600;color:var(--blue);margin-bottom:8px;">MONTH 2 — AI Features</div><div style="display:flex;flex-direction:column;gap:6px;"><div style="background:var(--blue-light);border-radius:8px;padding:10px 14px;font-size:13px;color:var(--ink2);">Personalization engine v1</div><div style="background:var(--blue-light);border-radius:8px;padding:10px 14px;font-size:13px;color:var(--ink2);">Smart notifications system</div></div></div>
+        <div><div style="font-size:12px;font-weight:600;color:var(--green);margin-bottom:8px;">MONTH 3 — Growth</div><div style="display:flex;flex-direction:column;gap:6px;"><div style="background:var(--green-light);border-radius:8px;padding:10px 14px;font-size:13px;color:var(--ink2);">Analytics dashboard & reporting</div><div style="background:var(--green-light);border-radius:8px;padding:10px 14px;font-size:13px;color:var(--ink2);">Launch & growth experiments</div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="mvp" class="svc-detail">
+  <div>
+    <div class="icon-lg icon-g">🚀</div>
+    <span class="svc-tag">For Founders</span>
+    <h2 style="font-size:clamp(28px,3vw,40px);letter-spacing:-1px;margin-bottom:16px;">MVP in 6 Weeks</h2>
+    <p style="font-size:16px;color:var(--ink2);line-height:1.7;margin-bottom:28px;">From idea to investor-ready product in just 6 weeks. We've packaged our entire process into a structured sprint — discovery, design, build, and launch. Designed for founders who need to move fast and prove their concept.</p>
+    <div class="feat-list">
+      <div class="feat-item"><span class="feat-check">→</span>Week 1–2: Discovery, UX wireframes, tech architecture</div>
+      <div class="feat-item"><span class="feat-check">→</span>Week 3–5: Core feature development with daily standups</div>
+      <div class="feat-item"><span class="feat-check">→</span>Week 6: QA, deployment, and beta user onboarding</div>
+      <div class="feat-item"><span class="feat-check">→</span>Pitch deck support and investor-ready materials</div>
+      <div class="feat-item"><span class="feat-check">→</span>30-day post-launch support included</div>
+    </div>
+    <a href="contact.html" class="btn-primary">Apply for MVP Sprint →</a>
+  </div>
+  <div>
+    <div class="vis-box">
+      <div class="vis-label">6-Week Sprint Timeline</div>
+      <div style="display:flex;border-radius:10px;overflow:hidden;margin:12px 0 16px;">
+        <div style="flex:2;background:var(--accent);padding:12px;text-align:center;"><div style="font-size:11px;font-weight:600;color:rgba(255,255,255,.7);">WK 1–2</div><div style="font-size:13px;font-weight:600;color:white;margin-top:2px;">Discovery</div></div>
+        <div style="flex:3;background:var(--blue);padding:12px;text-align:center;"><div style="font-size:11px;font-weight:600;color:rgba(255,255,255,.7);">WK 3–5</div><div style="font-size:13px;font-weight:600;color:white;margin-top:2px;">Build</div></div>
+        <div style="flex:1;background:var(--green);padding:12px;text-align:center;"><div style="font-size:11px;font-weight:600;color:rgba(255,255,255,.7);">WK 6</div><div style="font-size:13px;font-weight:600;color:white;margin-top:2px;">🚀</div></div>
+      </div>
+      <div style="padding:16px;background:var(--accent-light);border-radius:var(--radius);border:1px solid rgba(212,82,26,.15);"><div style="font-size:13px;font-weight:500;color:var(--accent);">✓ Fixed scope, fixed timeline</div><div style="font-size:13px;color:var(--ink2);margin-top:4px;">You know exactly what you get — and when.</div></div>
+    </div>
+  </div>
+</div>
+
+<section class="price-sec">
+  <div class="container">
+    <p class="eyebrow" style="text-align:center;">Pricing</p>
+    <h2 style="font-family:'Syne',sans-serif;font-size:clamp(36px,4vw,52px);letter-spacing:-1.5px;text-align:center;margin-bottom:8px;">Simple, transparent pricing</h2>
+    <p style="font-size:18px;color:var(--ink2);font-weight:300;text-align:center;max-width:480px;margin:0 auto;">No hidden fees. No surprise invoices. Know exactly what you're getting before you sign.</p>
+    <div class="price-grid">
+      <div class="price-card">
+        <div class="price-name">Starter</div><div class="price-val">$8k</div>
+        <div class="price-per">One-time · MVP Sprint</div>
+        <ul class="price-feats"><li class="pf"><span class="pc">✓</span>6-week MVP build</li><li class="pf"><span class="pc">✓</span>1 core AI feature integrated</li><li class="pf"><span class="pc">✓</span>Basic product strategy session</li><li class="pf"><span class="pc">✓</span>30-day post-launch support</li><li class="pf"><span class="pc">✓</span>Full source code ownership</li></ul>
+        <a href="contact.html" class="btn-price">Get Started</a>
+      </div>
+      <div class="price-card featured">
+        <div class="pop-badge">Most Popular</div>
+        <div class="price-name">Growth</div><div class="price-val">$24k</div>
+        <div class="price-per">One-time · Full Product Build</div>
+        <ul class="price-feats"><li class="pf"><span class="pc" style="color:var(--accent2);">✓</span>12-week full product build</li><li class="pf"><span class="pc" style="color:var(--accent2);">✓</span>Multiple AI features, deeply integrated</li><li class="pf"><span class="pc" style="color:var(--accent2);">✓</span>Full product roadmap + 90-day strategy</li><li class="pf"><span class="pc" style="color:var(--accent2);">✓</span>Product audit before build begins</li><li class="pf"><span class="pc" style="color:var(--accent2);">✓</span>60-day post-launch support</li><li class="pf"><span class="pc" style="color:var(--accent2);">✓</span>Monthly strategy call included</li></ul>
+        <a href="contact.html" class="btn-price featured">Start Your Project</a>
+      </div>
+      <div class="price-card">
+        <div class="price-name">Partnership</div><div class="price-val">Custom</div>
+        <div class="price-per">Monthly retainer · Ongoing</div>
+        <ul class="price-feats"><li class="pf"><span class="pc">✓</span>Embedded AI product team</li><li class="pf"><span class="pc">✓</span>Unlimited strategy and consulting</li><li class="pf"><span class="pc">✓</span>Continuous development and shipping</li><li class="pf"><span class="pc">✓</span>Priority support — under 4hr response</li><li class="pf"><span class="pc">✓</span>Quarterly roadmap planning sessions</li></ul>
+        <a href="contact.html" class="btn-price">Talk to Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--cream);">
+  <div class="container">
+    <p class="eyebrow" style="text-align:center;">FAQ</p>
+    <h2 style="font-family:'Syne',sans-serif;font-size:clamp(32px,3.5vw,48px);letter-spacing:-1.5px;text-align:center;">Frequently asked questions</h2>
+    <div class="faq-list">
+      <div class="faq-item"><div class="faq-q" onclick="toggle(this)">Do I need a technical background to work with you?<span class="faq-icon">+</span></div><div class="faq-a">Not at all. We work with founders, business owners, and product managers at every technical level. We translate your vision into technical decisions — you stay focused on the business.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggle(this)">What if I only have an idea and no product yet?<span class="faq-icon">+</span></div><div class="faq-a">That's where we shine most. Start with a free discovery call. We'll help you validate the idea, define the MVP scope, and give you a clear plan before any money changes hands.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggle(this)">How is your AI development different from a regular agency?<span class="faq-icon">+</span></div><div class="faq-a">Traditional agencies write features. We design intelligence. Every architecture decision we make considers AI as a core system — not a plugin. Your product doesn't just do things; it learns and improves over time.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggle(this)">Do I own the code and intellectual property?<span class="faq-icon">+</span></div><div class="faq-a">Yes, 100%. Upon project completion and final payment, all source code, intellectual property, and assets are transferred to you with no ongoing licensing fees or lock-in.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggle(this)">What technologies do you typically use?<span class="faq-icon">+</span></div><div class="faq-a">We're technology-agnostic and pick the best stack for your use case. Common choices: React/Next.js for frontend, Node.js or Python for backend, PostgreSQL or MongoDB for data, and OpenAI or Anthropic models for AI.</div></div>
+    </div>
+  </div>
+</section>
+</div>
+<footer>
+  <div class="ft">
+    <div class="ft-top">
+      <div><div class="ft-logo">Build<span>AI</span></div><p class="ft-desc">We build AI-powered software and product strategies that help startups and businesses grow faster and smarter.</p></div>
+      <div><div class="ft-col-title">Services</div><ul class="ft-links"><li><a href="services.html">AI Development</a></li><li><a href="services.html#pm">Product Strategy</a></li><li><a href="services.html#mvp">MVP in 6 Weeks</a></li></ul></div>
+      <div><div class="ft-col-title">Company</div><ul class="ft-links"><li><a href="about.html">About Us</a></li><li><a href="work.html">Our Work</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div><div class="ft-col-title">Connect</div><ul class="ft-links"><li><a href="#">LinkedIn</a></li><li><a href="#">Twitter / X</a></li><li><a href="#">hello@buildai.co</a></li></ul></div>
+    </div>
+    <div class="ft-bottom"><span>© 2025 BuildAI. All rights reserved.</span><span>Privacy Policy · Terms of Service</span></div>
+  </div>
+</footer>
+<script>function toggle(el){const i=el.parentElement;const o=i.classList.contains('open');document.querySelectorAll('.faq-item').forEach(x=>x.classList.remove('open'));if(!o)i.classList.add('open');}</script>
+</body></html>

@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BuildAI — Build Smarter Products with AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#0f0e0c;--ink2:#3a3835;--ink3:#6b6860;--cream:#faf8f4;--cream2:#f2ede4;--cream3:#e8e0d2;--accent:#d4521a;--accent2:#e87840;--accent-light:#fdf0ea;--blue:#1a3d6b;--blue-light:#e8eff8;--green:#1a5c3a;--green-light:#e8f5ee;--border:rgba(15,14,12,0.1);--radius:12px;--radius-lg:20px;--shadow:0 1px 3px rgba(15,14,12,0.06),0 4px 16px rgba(15,14,12,0.06);--shadow-lg:0 8px 40px rgba(15,14,12,0.12)}
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,h4,h5{font-family:'Syne',sans-serif;line-height:1.15;font-weight:700}
+  a{color:inherit;text-decoration:none}
+
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,248,244,0.93);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 40px;height:68px;display:flex;align-items:center;justify-content:space-between}
+  .nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;letter-spacing:-0.5px;color:var(--ink);display:flex;align-items:center;gap:8px}
+  .nav-logo span{color:var(--accent)}
+  .logo-dot{width:8px;height:8px;background:var(--accent);border-radius:50%;animation:pulse 2s ease-in-out infinite}
+  @keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.3);opacity:.7}}
+  .nav-links{display:flex;align-items:center;gap:36px;list-style:none}
+  .nav-links a{font-size:14px;font-weight:500;color:var(--ink2);transition:color .2s;position:relative}
+  .nav-links a::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:1.5px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+  .nav-links a:hover{color:var(--accent)}.nav-links a:hover::after{transform:scaleX(1)}
+  .nav-cta{background:var(--ink)!important;color:var(--cream)!important;padding:10px 22px!important;border-radius:100px!important;transition:background .2s,transform .15s!important}
+  .nav-cta::after{display:none!important}.nav-cta:hover{background:var(--accent)!important;transform:translateY(-1px)}
+
+  .hero{min-height:100vh;padding:140px 40px 100px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;max-width:1280px;margin:0 auto}
+  .hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--accent-light);border:1px solid rgba(212,82,26,0.2);padding:6px 14px;border-radius:100px;font-size:13px;font-weight:500;color:var(--accent);margin-bottom:28px}
+  .hero-badge-dot{width:6px;height:6px;background:var(--accent);border-radius:50%}
+  .hero h1{font-size:clamp(44px,5.5vw,80px);letter-spacing:-2px;line-height:1.05;margin-bottom:24px}
+  .hero h1 em{font-style:normal;color:var(--accent)}
+  .hero-sub{font-size:18px;color:var(--ink2);line-height:1.65;max-width:480px;margin-bottom:40px;font-weight:300}
+  .hero-btns{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:56px}
+  .btn-primary{background:var(--ink);color:var(--cream);padding:14px 28px;border-radius:100px;font-size:15px;font-weight:500;display:inline-flex;align-items:center;gap:8px;transition:background .2s,transform .15s;cursor:pointer;border:none;font-family:'DM Sans',sans-serif}
+  .btn-primary:hover{background:var(--accent);transform:translateY(-2px)}
+  .btn-secondary{background:transparent;color:var(--ink);padding:14px 28px;border-radius:100px;font-size:15px;font-weight:500;border:1.5px solid var(--border);display:inline-flex;align-items:center;gap:8px;transition:border-color .2s,transform .15s;font-family:'DM Sans',sans-serif}
+  .btn-secondary:hover{border-color:var(--ink);transform:translateY(-2px)}
+  .hero-stats{display:flex;gap:36px;border-top:1px solid var(--border);padding-top:28px}
+  .hero-stat-num{font-family:'Syne',sans-serif;font-size:28px;font-weight:700;line-height:1}
+  .hero-stat-label{font-size:13px;color:var(--ink3);margin-top:4px}
+
+  .hero-visual{position:relative;height:520px}
+  .hero-card-main{position:absolute;top:40px;left:0;right:40px;background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px;box-shadow:var(--shadow-lg)}
+  .hero-card-label{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);margin-bottom:16px;display:flex;align-items:center;gap:6px}
+  .card-dot{width:6px;height:6px;border-radius:50%;background:#22c55e}
+  .progress-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+  .progress-label{font-size:13px;color:var(--ink2);flex:1}
+  .progress-bar-wrap{flex:2;margin:0 12px;background:var(--cream2);border-radius:100px;height:6px}
+  .progress-bar{height:6px;border-radius:100px;background:var(--accent)}
+  .progress-val{font-size:13px;font-weight:500;min-width:32px;text-align:right}
+  .hero-card-mini{position:absolute;background:white;border:1px solid var(--border);border-radius:var(--radius);padding:18px 22px;box-shadow:var(--shadow)}
+  .card-mini-2{bottom:60px;right:-20px;width:200px}
+  .card-mini-3{bottom:20px;left:30px;width:220px}
+  .mini-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:8px}
+  .icon-o{background:var(--accent-light)}.icon-b{background:var(--blue-light)}.icon-g{background:var(--green-light)}
+  .mini-title{font-size:13px;font-weight:500}
+
+  section{padding:100px 40px}
+  .container{max-width:1200px;margin:0 auto}
+  .eyebrow{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+  .sec-title{font-size:clamp(36px,4vw,56px);letter-spacing:-1.5px;margin-bottom:20px}
+  .sec-sub{font-size:18px;color:var(--ink2);font-weight:300;line-height:1.65;max-width:560px}
+
+  .logos-bar{padding:36px 40px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:white}
+  .logos-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:32px}
+  .logos-label{font-size:13px;color:var(--ink3);white-space:nowrap;font-style:italic}
+  .logos-list{display:flex;align-items:center;gap:48px;flex-wrap:wrap}
+  .logo-item{font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:var(--ink3);opacity:.45;transition:opacity .2s}.logo-item:hover{opacity:.8}
+
+  .aud-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:56px}
+  .aud-card{background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px 28px;text-align:center;transition:transform .25s,box-shadow .25s}
+  .aud-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+  .aud-icon{font-size:40px;margin-bottom:16px}
+  .aud-title{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;margin-bottom:10px}
+  .aud-desc{font-size:14px;color:var(--ink2);line-height:1.6}
+
+  .prob-sec{background:var(--ink)}
+  .pain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:64px;background:rgba(255,255,255,.06);border-radius:var(--radius-lg);overflow:hidden}
+  .pain-card{background:rgba(255,255,255,.04);padding:40px 36px;transition:background .3s}.pain-card:hover{background:rgba(255,255,255,.08)}
+  .pain-num{font-family:'Syne',sans-serif;font-size:60px;font-weight:800;color:rgba(212,82,26,.15);line-height:1;margin-bottom:16px;letter-spacing:-2px}
+  .pain-title{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:var(--cream);margin-bottom:12px}
+  .pain-desc{font-size:15px;color:rgba(250,248,244,.5);line-height:1.65}
+
+  .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:64px}
+  .svc-card{background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:36px 32px;transition:transform .25s,box-shadow .25s;position:relative;overflow:hidden}
+  .svc-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .3s}
+  .svc-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}.svc-card:hover::before{transform:scaleX(1)}
+  .svc-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:24px}
+  .svc-title{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;margin-bottom:12px}
+  .svc-desc{font-size:15px;color:var(--ink2);line-height:1.65}
+  .svc-arrow{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:500;color:var(--accent);margin-top:20px;transition:gap .2s}
+  .svc-card:hover .svc-arrow{gap:10px}
+
+  .how-sec{background:var(--cream2)}
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);margin-top:64px;position:relative}
+  .steps::before{content:'';position:absolute;top:28px;left:10%;right:10%;height:1px;background:linear-gradient(to right,transparent,var(--accent),transparent);z-index:0}
+  .step{padding:0 20px;text-align:center;position:relative;z-index:1}
+  .step-num{width:56px;height:56px;border-radius:50%;background:white;border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;margin:0 auto 24px;font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:var(--accent)}
+  .step-title{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;margin-bottom:10px}
+  .step-desc{font-size:14px;color:var(--ink2);line-height:1.65}
+
+  .why-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+  .why-visual{background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:36px;box-shadow:var(--shadow)}
+  .m-row{display:flex;align-items:center;padding:16px 0;border-bottom:1px solid var(--border)}.m-row:last-child{border-bottom:none}
+  .m-label{font-size:14px;color:var(--ink2);flex:1}
+  .m-bar-wrap{flex:1.5;margin:0 16px;background:var(--cream2);border-radius:100px;height:8px;overflow:hidden}
+  .m-bar{height:8px;border-radius:100px}
+  .bar-a{background:var(--cream3)}.bar-b{background:var(--accent)}
+  .m-nums{display:flex;gap:8px;align-items:center}
+  .m-old{font-size:13px;color:var(--ink3);text-decoration:line-through}
+  .m-new{font-size:14px;font-weight:600;color:var(--accent)}
+  .why-pts{margin-top:36px;display:flex;flex-direction:column;gap:20px}
+  .why-pt{display:flex;gap:16px;align-items:flex-start}
+  .why-pt-icon{width:40px;height:40px;border-radius:10px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:18px}
+  .why-pt-title{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;margin-bottom:4px}
+  .why-pt-desc{font-size:14px;color:var(--ink2);line-height:1.6}
+
+  .cases-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:64px}
+  .case-card{background:white;border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:transform .25s,box-shadow .25s}
+  .case-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+  .case-img{height:200px;display:flex;align-items:center;justify-content:center;font-size:48px}
+  .case-body{padding:28px}
+  .case-tag{display:inline-block;background:var(--cream2);color:var(--ink2);font-size:12px;font-weight:500;padding:4px 12px;border-radius:100px;margin-bottom:14px}
+  .case-title{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;margin-bottom:10px}
+  .case-desc{font-size:14px;color:var(--ink2);line-height:1.6;margin-bottom:20px}
+  .case-result{font-size:14px;font-weight:500;color:var(--green)}
+
+  .testi-sec{background:var(--cream2)}
+  .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:64px}
+  .testi-card{background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px}
+  .testi-stars{color:#f59e0b;font-size:16px;letter-spacing:2px;margin-bottom:20px}
+  .testi-quote{font-size:15px;line-height:1.7;color:var(--ink2);margin-bottom:24px;font-style:italic}
+  .testi-author{display:flex;align-items:center;gap:12px}
+  .testi-av{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:700;font-size:14px;color:white}
+  .testi-name{font-weight:500;font-size:14px}.testi-role{font-size:13px;color:var(--ink3)}
+
+  .nums-sec{background:var(--accent);padding:80px 40px}
+  .nums-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:rgba(255,255,255,.15);border-radius:var(--radius-lg);overflow:hidden}
+  .num-item{padding:40px 32px;text-align:center;background:rgba(255,255,255,.05);transition:background .2s}.num-item:hover{background:rgba(255,255,255,.12)}
+  .num-val{font-family:'Syne',sans-serif;font-size:52px;font-weight:800;color:white;letter-spacing:-2px;line-height:1;margin-bottom:8px}
+  .num-label{font-size:14px;color:rgba(255,255,255,.7)}
+
+  .cta-sec{background:var(--ink);text-align:center;padding:100px 40px;position:relative;overflow:hidden}
+  .cta-sec::before{content:'';position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(212,82,26,.15) 0%,transparent 70%);pointer-events:none}
+  .btn-light{background:white;color:var(--ink);padding:16px 32px;border-radius:100px;font-size:15px;font-weight:500;display:inline-flex;align-items:center;gap:8px;transition:background .2s,transform .15s;border:none;font-family:'DM Sans',sans-serif;cursor:pointer}
+  .btn-light:hover{background:var(--accent);color:white;transform:translateY(-2px)}
+  .btn-outline-light{background:transparent;color:rgba(255,255,255,.75);padding:16px 32px;border-radius:100px;font-size:15px;font-weight:500;border:1.5px solid rgba(255,255,255,.2);display:inline-flex;align-items:center;gap:8px;transition:all .2s;font-family:'DM Sans',sans-serif}
+  .btn-outline-light:hover{border-color:rgba(255,255,255,.6);color:white;transform:translateY(-2px)}
+
+  footer{background:var(--ink);padding:60px 40px 36px;border-top:1px solid rgba(255,255,255,.06)}
+  .ft{max-width:1200px;margin:0 auto}
+  .ft-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:60px;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:32px}
+  .ft-logo{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:white;margin-bottom:12px}.ft-logo span{color:var(--accent)}
+  .ft-desc{font-size:14px;color:rgba(255,255,255,.4);line-height:1.65;max-width:280px}
+  .ft-col-title{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.08em;margin-bottom:20px}
+  .ft-links{list-style:none;display:flex;flex-direction:column;gap:12px}.ft-links a{font-size:14px;color:rgba(255,255,255,.5);transition:color .2s}.ft-links a:hover{color:white}
+  .ft-bottom{display:flex;align-items:center;justify-content:space-between;font-size:13px;color:rgba(255,255,255,.3)}
+
+  @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  .hero-left>*{animation:fadeUp .6s ease both}
+  .hero-left>*:nth-child(1){animation-delay:.1s}.hero-left>*:nth-child(2){animation-delay:.2s}.hero-left>*:nth-child(3){animation-delay:.3s}.hero-left>*:nth-child(4){animation-delay:.4s}.hero-left>*:nth-child(5){animation-delay:.5s}
+  .hero-visual{animation:fadeIn .8s ease .4s both}
+
+  @media(max-width:900px){nav{padding:0 20px}.nav-links{display:none}.hero{grid-template-columns:1fr;padding:120px 20px 80px;gap:60px}.hero-visual{height:300px}section{padding:70px 20px}.svc-grid,.cases-grid,.testi-grid,.pain-grid,.aud-grid{grid-template-columns:1fr}.why-grid{grid-template-columns:1fr;gap:40px}.steps{grid-template-columns:1fr 1fr;gap:32px}.steps::before{display:none}.nums-grid{grid-template-columns:repeat(2,1fr)}.ft-top{grid-template-columns:1fr 1fr;gap:32px}.ft-bottom{flex-direction:column;gap:12px;text-align:center}.logos-inner{flex-direction:column;gap:20px}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><div class="logo-dot"></div>Build<span>AI</span></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="work.html">Our Work</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html" class="nav-cta">Book a Free Call</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section style="padding:0;background:var(--cream);">
+  <div class="hero">
+    <div class="hero-left">
+      <div class="hero-badge"><div class="hero-badge-dot"></div>AI-Powered Product Studio</div>
+      <h1>We Build Products<br>That Think <em>Smarter</em></h1>
+      <p class="hero-sub">We don't just write code — we design intelligence. AI-native software development combined with deep product strategy, all under one roof.</p>
+      <div class="hero-btns">
+        <a href="contact.html" class="btn-primary">Start Your Project →</a>
+        <a href="#work" class="btn-secondary">See Our Work</a>
+      </div>
+      <div class="hero-stats">
+        <div><div class="hero-stat-num">40+</div><div class="hero-stat-label">Projects Delivered</div></div>
+        <div><div class="hero-stat-num">3×</div><div class="hero-stat-label">Faster Development</div></div>
+        <div><div class="hero-stat-num">98%</div><div class="hero-stat-label">Client Satisfaction</div></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card-main">
+        <div class="hero-card-label"><div class="card-dot"></div>Live AI Build Progress</div>
+        <div class="progress-row"><span class="progress-label">Product Roadmap</span><div class="progress-bar-wrap"><div class="progress-bar" style="width:92%"></div></div><span class="progress-val">92%</span></div>
+        <div class="progress-row"><span class="progress-label">Feature Development</span><div class="progress-bar-wrap"><div class="progress-bar" style="width:78%"></div></div><span class="progress-val">78%</span></div>
+        <div class="progress-row"><span class="progress-label">AI Model Integration</span><div class="progress-bar-wrap"><div class="progress-bar" style="width:65%"></div></div><span class="progress-val">65%</span></div>
+        <div class="progress-row"><span class="progress-label">QA & Optimization</span><div class="progress-bar-wrap"><div class="progress-bar" style="width:40%"></div></div><span class="progress-val">40%</span></div>
+      </div>
+      <div class="hero-card-mini card-mini-2">
+        <div class="mini-icon icon-o">🤖</div>
+        <div class="mini-title">AI Features Shipped</div>
+        <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--ink);margin-top:4px;">127</div>
+      </div>
+      <div class="hero-card-mini card-mini-3">
+        <div class="mini-icon icon-g">📈</div>
+        <div class="mini-title">Avg. Revenue Uplift</div>
+        <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--green);margin-top:4px;">+34%</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOGOS -->
+<div class="logos-bar">
+  <div class="logos-inner">
+    <span class="logos-label">Trusted by teams at</span>
+    <div class="logos-list">
+      <div class="logo-item">Horizion</div><div class="logo-item">Crestline</div><div class="logo-item">Vantara</div><div class="logo-item">Pulsify</div><div class="logo-item">Stackloom</div><div class="logo-item">Driftwerk</div>
+    </div>
+  </div>
+</div>
+
+<!-- WHO WE SERVE -->
+<section style="background:white;">
+  <div class="container">
+    <p class="eyebrow">Who We Work With</p>
+    <h2 class="sec-title">Built for every type<br>of ambitious team</h2>
+    <p class="sec-sub">Whether you're a founder, a growing business, or an enterprise — if you need AI-powered software or product strategy, we're the right partner.</p>
+    <div class="aud-grid">
+      <div class="aud-card"><div class="aud-icon">🚀</div><div class="aud-title">Founders & Startups</div><p class="aud-desc">Have an idea but no tech team? We build your MVP in 6 weeks — investor-ready, user-tested, and built to scale.</p></div>
+      <div class="aud-card"><div class="aud-icon">🏢</div><div class="aud-title">SMEs & Growing Businesses</div><p class="aud-desc">Drowning in manual work? We identify where AI creates the most leverage and automate what slows you down.</p></div>
+      <div class="aud-card"><div class="aud-icon">🏭</div><div class="aud-title">Enterprise Teams</div><p class="aud-desc">Want to integrate AI into an existing product? We work alongside your team — seamlessly and at scale.</p></div>
+      <div class="aud-card"><div class="aud-icon">💡</div><div class="aud-title">Product Managers</div><p class="aud-desc">Need to prioritize features or build a roadmap? We bring product strategy expertise as your thinking partner.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="prob-sec">
+  <div class="container">
+    <p class="eyebrow" style="color:var(--accent2);">The Problem</p>
+    <h2 class="sec-title" style="color:var(--cream)">Why most software projects fail</h2>
+    <p class="sec-sub" style="color:rgba(250,248,244,.6)">You've been burned before. Here's exactly what went wrong — and why we're fundamentally different.</p>
+    <div class="pain-grid">
+      <div class="pain-card"><div class="pain-num">01</div><h3 class="pain-title">Order-takers, not thinkers</h3><p class="pain-desc">Most dev agencies build exactly what you ask for — without questioning whether it solves the right problem. Building the wrong thing fast is worse than not building at all.</p></div>
+      <div class="pain-card"><div class="pain-num">02</div><h3 class="pain-title">"AI-Powered" in name only</h3><p class="pain-desc">Everyone claims AI — but most agencies just drop an API call onto legacy code. That's not an AI product. That's a chatbot with a marketing label attached to it.</p></div>
+      <div class="pain-card"><div class="pain-num">03</div><h3 class="pain-title">Slow, expensive, unpredictable</h3><p class="pain-desc">Traditional development takes 3–6 months for an MVP. By the time you launch, the market has moved. Your competitors have shipped. And you're still waiting.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" style="background:var(--cream);">
+  <div class="container">
+    <p class="eyebrow">What We Do</p>
+    <h2 class="sec-title">Everything you need to<br>build and scale</h2>
+    <p class="sec-sub">From initial strategy to launch and beyond — we're your full-stack AI product partner.</p>
+    <div class="svc-grid">
+      <a href="services.html" class="svc-card"><div class="svc-icon icon-o">🏗️</div><h3 class="svc-title">AI Software Development</h3><p class="svc-desc">We build custom, production-grade AI-native applications from scratch. Fast, intelligent, and architected to scale from day one.</p><span class="svc-arrow">Learn more →</span></a>
+      <a href="services.html#pm" class="svc-card"><div class="svc-icon icon-b">🗺️</div><h3 class="svc-title">Product Roadmap Strategy</h3><p class="svc-desc">We don't just build what you ask — we help you figure out what to build. Feature prioritization, user flows, and 90-day roadmaps.</p><span class="svc-arrow">Learn more →</span></a>
+      <a href="services.html#mvp" class="svc-card"><div class="svc-icon icon-g">🚀</div><h3 class="svc-title">MVP in 6 Weeks</h3><p class="svc-desc">Go from idea to investor-ready product in 6 weeks. Designed for founders who need to move fast without sacrificing quality.</p><span class="svc-arrow">Learn more →</span></a>
+      <a href="services.html#integration" class="svc-card"><div class="svc-icon icon-o">🔗</div><h3 class="svc-title">AI Integration</h3><p class="svc-desc">Already have a product? We identify where AI creates the most leverage — automation, recommendations, intelligence — and integrate it deeply.</p><span class="svc-arrow">Learn more →</span></a>
+      <a href="services.html#audit" class="svc-card"><div class="svc-icon icon-b">🔍</div><h3 class="svc-title">Product Audit</h3><p class="svc-desc">We review your existing product and deliver a prioritized improvement list — UX gaps, missing features, and AI opportunities you're leaving on the table.</p><span class="svc-arrow">Learn more →</span></a>
+      <a href="services.html#ongoing" class="svc-card"><div class="svc-icon icon-g">♻️</div><h3 class="svc-title">Ongoing Partnership</h3><p class="svc-desc">Think of us as your embedded AI product team. Monthly retainer, unlimited strategy sessions, and continuous development shipping.</p><span class="svc-arrow">Learn more →</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how" class="how-sec">
+  <div class="container">
+    <p class="eyebrow">The Process</p>
+    <h2 class="sec-title">From idea to launch<br>in 4 clear steps</h2>
+    <div class="steps">
+      <div class="step"><div class="step-num">01</div><h3 class="step-title">Discovery Call</h3><p class="step-desc">We dig into your goals, users, and constraints. Free 30-minute session — no sales pressure, just honest conversation.</p></div>
+      <div class="step"><div class="step-num">02</div><h3 class="step-title">Strategy & Roadmap</h3><p class="step-desc">We deliver a product brief, prioritized feature list, and tech architecture within 5 business days.</p></div>
+      <div class="step"><div class="step-num">03</div><h3 class="step-title">Build with AI</h3><p class="step-desc">Sprint-based development with weekly demos. You see real progress every Friday — no black boxes.</p></div>
+      <div class="step"><div class="step-num">04</div><h3 class="step-title">Launch & Grow</h3><p class="step-desc">We don't disappear at launch. We monitor, iterate, and help you scale based on real user data.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY AI -->
+<section style="background:var(--cream);">
+  <div class="container">
+    <div class="why-grid">
+      <div>
+        <p class="eyebrow">Why AI-First</p>
+        <h2 class="sec-title">AI-built software is fundamentally different</h2>
+        <p class="sec-sub" style="margin-bottom:0;">It's not about adding a chatbot. AI-first means every architectural decision is made with intelligence as a core layer — from day zero, not as an afterthought.</p>
+        <div class="why-pts">
+          <div class="why-pt"><div class="why-pt-icon icon-o">⚡</div><div><div class="why-pt-title">3× Faster Development</div><p class="why-pt-desc">AI-assisted coding and automated testing compress timelines from months to weeks — without cutting corners.</p></div></div>
+          <div class="why-pt"><div class="why-pt-icon icon-b">🧠</div><div><div class="why-pt-title">Smarter Products by Default</div><p class="why-pt-desc">Your product learns from user behavior. Personalization, recommendations, and automation are built in — not bolted on.</p></div></div>
+          <div class="why-pt"><div class="why-pt-icon icon-g">📉</div><div><div class="why-pt-title">Lower Long-Term Costs</div><p class="why-pt-desc">AI automates what used to require expensive human operators — support, data processing, and quality control.</p></div></div>
+        </div>
+      </div>
+      <div class="why-visual">
+        <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:20px;">Traditional vs AI-First</div>
+        <div class="m-row"><div class="m-label">MVP Timeline</div><div class="m-bar-wrap"><div class="m-bar bar-a" style="width:100%"></div></div><div class="m-nums"><span class="m-old">6 mo</span><span class="m-new">6 wk</span></div></div>
+        <div class="m-row"><div class="m-label">Dev Cost</div><div class="m-bar-wrap"><div class="m-bar bar-b" style="width:40%"></div></div><div class="m-nums"><span class="m-old">$80k</span><span class="m-new">$32k</span></div></div>
+        <div class="m-row"><div class="m-label">Feature Velocity</div><div class="m-bar-wrap"><div class="m-bar bar-b" style="width:75%"></div></div><div class="m-nums"><span class="m-new">3× faster</span></div></div>
+        <div class="m-row"><div class="m-label">User Retention</div><div class="m-bar-wrap"><div class="m-bar bar-b" style="width:60%"></div></div><div class="m-nums"><span class="m-new">+42%</span></div></div>
+        <div style="margin-top:24px;padding:16px;background:var(--accent-light);border-radius:var(--radius);border:1px solid rgba(212,82,26,.15);"><div style="font-size:13px;color:var(--accent);font-weight:500;">💡 The bottom line</div><div style="font-size:14px;color:var(--ink2);margin-top:6px;line-height:1.6;">AI-first development delivers faster, smarter products at a fraction of the traditional cost — without compromising on quality.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CASE STUDIES -->
+<section id="work" style="background:var(--cream2);">
+  <div class="container">
+    <p class="eyebrow">Our Work</p>
+    <h2 class="sec-title">Products we've built<br>and shipped</h2>
+    <p class="sec-sub">Real clients, real results — from funded startups to enterprise teams.</p>
+    <div class="cases-grid">
+      <a href="work.html#case1" class="case-card"><div class="case-img" style="background:linear-gradient(135deg,#1a3d6b,#2d6db5);">📊</div><div class="case-body"><span class="case-tag">FinTech · SaaS</span><h3 class="case-title">AI Analytics Dashboard</h3><p class="case-desc">An intelligent reporting platform that auto-generates executive insights and predicts revenue trends — no analyst required.</p><div class="case-result">✅ 60% reduction in manual reporting</div></div></a>
+      <a href="work.html#case2" class="case-card"><div class="case-img" style="background:linear-gradient(135deg,#1a5c3a,#2d9e63);">🛒</div><div class="case-body"><span class="case-tag">E-Commerce · AI</span><h3 class="case-title">Smart Recommendation Engine</h3><p class="case-desc">A real-time ML recommendation system that adapts to each user's behavior and purchase history to surface the right products.</p><div class="case-result">✅ Average order value up +34%</div></div></a>
+      <a href="work.html#case3" class="case-card"><div class="case-img" style="background:linear-gradient(135deg,#6b1a4b,#b52d7e);">🏥</div><div class="case-body"><span class="case-tag">HealthTech · MVP</span><h3 class="case-title">Patient Intake Automation</h3><p class="case-desc">Transformed a 45-minute paper-based intake process into an AI-powered digital flow deployed across 3 hospitals in 4 months.</p><div class="case-result">✅ Intake process 80% faster</div></div></a>
+    </div>
+    <div style="text-align:center;margin-top:40px;"><a href="work.html" class="btn-secondary">View All Case Studies →</a></div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi-sec">
+  <div class="container">
+    <p class="eyebrow">What Clients Say</p>
+    <h2 class="sec-title">Don't take our word for it</h2>
+    <div class="testi-grid">
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-quote">"BuildAI didn't just build what we asked for — they challenged us on features we thought we needed and gave us a roadmap 10× better than what we came in with."</p><div class="testi-author"><div class="testi-av" style="background:var(--blue);">AK</div><div><div class="testi-name">Arjun Kapoor</div><div class="testi-role">CEO, Stackloom</div></div></div></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-quote">"We went from a messy Notion doc of ideas to a funded product in 8 weeks. Their AI development speed is unlike anything I've seen from a dev agency before."</p><div class="testi-author"><div class="testi-av" style="background:var(--accent);">SR</div><div><div class="testi-name">Sneha Rathi</div><div class="testi-role">Founder, Pulsify</div></div></div></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-quote">"The product audit alone was worth the entire engagement. They found 3 critical UX issues and 2 major AI opportunities we were completely blind to."</p><div class="testi-author"><div class="testi-av" style="background:var(--green);">PM</div><div><div class="testi-name">Priya Mehta</div><div class="testi-role">Head of Product, Vantara</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- NUMBERS -->
+<section class="nums-sec">
+  <div class="container">
+    <div class="nums-grid">
+      <div class="num-item"><div class="num-val">40+</div><div class="num-label">Products Launched</div></div>
+      <div class="num-item"><div class="num-val">6 wk</div><div class="num-label">Average MVP Timeline</div></div>
+      <div class="num-item"><div class="num-val">98%</div><div class="num-label">On-Time Delivery Rate</div></div>
+      <div class="num-item"><div class="num-val">8</div><div class="num-label">Industries Served</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-sec">
+  <div class="container" style="position:relative;z-index:1;">
+    <p class="eyebrow" style="color:var(--accent2);">Get Started</p>
+    <h2 class="sec-title" style="color:white;max-width:640px;margin:0 auto 20px;">Ready to build something smarter?</h2>
+    <p class="sec-sub" style="color:rgba(250,248,244,.55);max-width:500px;margin:0 auto 44px;">Book a free 30-minute strategy call. We'll review your idea, challenge your assumptions, and show you exactly how we'd approach building it.</p>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+      <a href="contact.html" class="btn-light">Book Free Strategy Call →</a>
+      <a href="work.html" class="btn-outline-light">See Our Work</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft">
+    <div class="ft-top">
+      <div><div class="ft-logo">Build<span>AI</span></div><p class="ft-desc">We build AI-powered software and product strategies that help startups and businesses grow faster and smarter.</p></div>
+      <div><div class="ft-col-title">Services</div><ul class="ft-links"><li><a href="services.html">AI Development</a></li><li><a href="services.html#pm">Product Strategy</a></li><li><a href="services.html#mvp">MVP in 6 Weeks</a></li><li><a href="services.html#audit">Product Audit</a></li></ul></div>
+      <div><div class="ft-col-title">Company</div><ul class="ft-links"><li><a href="about.html">About Us</a></li><li><a href="work.html">Our Work</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div><div class="ft-col-title">Connect</div><ul class="ft-links"><li><a href="#">LinkedIn</a></li><li><a href="#">Twitter / X</a></li><li><a href="#">hello@buildai.co</a></li></ul></div>
+    </div>
+    <div class="ft-bottom"><span>© 2025 BuildAI. All rights reserved.</span><span>Privacy Policy · Terms of Service</span></div>
+  </div>
+</footer>
+</body>
+</html>
